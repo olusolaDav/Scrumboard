@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Devs extends Component {
     render() { 
 
-        const {name, skill} = this.props
+        const {name, age, skill} = this.props
 
         console.log(name, skill)
         return (
@@ -11,6 +11,7 @@ class Devs extends Component {
             <h1>Hello class! :)</h1>
             <ul>
                 <li>Name: {name}</li>
+                <li>Age: {age}</li>
                 <li>Skill: {skill}</li>
             </ul>
           </div>

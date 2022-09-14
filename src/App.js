@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div className='app'>
-        <Devs name= "Olusola" skill="React"/>
+        <Devs name= "Olusola" age="25" skill="React"/>
       </div>
     );
   }
