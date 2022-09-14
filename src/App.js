@@ -1,14 +1,16 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react';
 import './App.css';
-import Devs from './Devs';
+import SignIn from './component/sign-in/sign-in';
+import SignUp from './component/sign-up/sign-up';
 
 
 class App extends Component {
-  c
+  
   render() {
     return (
-      <div className='app'>
-        <Devs name= "Olusola" skill="React"/>
+      <div className='App'>
+        <SignUp />
+        <SignIn />
       </div>
     );
   }
