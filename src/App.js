@@ -15,9 +15,10 @@ class App extends Component {
 
   handleChange = (e) => {
     const value = e.target.value;
+    const name = e.target.name
     this.setState({
       ...this.state,
-      [e.target.name]: value,
+      [name]: value
     });
     console.log(`${value}`);
   };
@@ -27,6 +28,9 @@ class App extends Component {
     console.log(
       `this form submited ${this.state.skill} and ${this.state.session}`
     );
+     //const name = e.target.name;
+     const value = e.target.value;
+     this.setState((values) => ({ ...values, [value]: ''}));
   };
 
   handleClick = () => {
