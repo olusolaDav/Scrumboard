@@ -16,3 +16,12 @@ button{
   margin-left: 20px;
   margin-bottom: 10px;
 }
+
+.links {
+  color: #04C4FC;
+}
+
+.link-home{
+  padding: 10px;
+  text-decoration: none;
+}

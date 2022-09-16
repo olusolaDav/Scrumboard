@@ -1,6 +1,7 @@
 import "../sign-up/sign-up.css";
 import { DiScrum } from "react-icons/di";
 import content from "../static/sign-in-content";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
   return (
@@ -27,7 +28,7 @@ const SignIn = () => {
                 />
               </li>
             );
-          })} 
+          })}
           <li>
             <button
               className=""
@@ -40,7 +41,17 @@ const SignIn = () => {
             </button>
           </li>
         </ul>
-        <p>Don't have an account? Sign up</p>
+        <p>
+          Don't have an account?{" "}
+          <Link to="/sign-up" className="links">
+            Sign up
+          </Link>{" "}
+        </p>
+        <p>
+          <Link to="/" className="links">
+            Back to Homepage
+          </Link>
+        </p>
       </form>
     </div>
   );
