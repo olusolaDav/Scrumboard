@@ -1,5 +1,7 @@
 import "../sign-up/sign-up.css";
 import { DiScrum } from "react-icons/di";
+import content from "../static/sign-in-content";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
   return (
@@ -14,37 +16,19 @@ const SignIn = () => {
       <form className="signupForm" name="signupform">
         <h1>Have an account Already?</h1>
         <h3>sign in here!</h3>
-        <ul className="noBullet">
-          <li>
-            <label for="email">Email</label>
-            <input
-              className="inputFields"
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
-          </li>
-          <li>
-            <label for="password">password</label>
-            <input
-              className="inputFields"
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-          </li>
-
-          <li>
-            <label for="project">Project name</label>
-            <input
-              className="inputFields"
-              type="text"
-              name="name"
-              placeholder="Project Name"
-            />
-          </li>
-
-          
+        <ul>
+          {content.inputs.map((input, key) => {
+            return (
+              <li key={key}>
+                <input
+                  className="inputFields"
+                  type={input.type}
+                  placeholder={input.placeholder}
+                  name={input.name}
+                />
+              </li>
+            );
+          })}
           <li>
             <button
               className=""
@@ -57,7 +41,17 @@ const SignIn = () => {
             </button>
           </li>
         </ul>
-        <p>Don't have an account? Sign up</p>
+        <p>
+          Don't have an account?{" "}
+          <Link to="/sign-up" className="links">
+            Sign up
+          </Link>{" "}
+        </p>
+        <p>
+          <Link to="/" className="links">
+            Back to Homepage
+          </Link>
+        </p>
       </form>
     </div>
   );
