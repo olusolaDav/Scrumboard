@@ -6,7 +6,7 @@ const content = {
       type: "text",
     },
     {
-      placeholder: "Emaill",
+      placeholder: "Email",
       name: "email",
       type: "email",
     },
@@ -15,7 +15,12 @@ const content = {
       placeholder: "Password",
       name: "password",
       type: "password",
-    }
+    },
+    {
+      placeholder: "Project Name",
+      name: "project",
+      type: "text",
+    },
   ],
 };
 

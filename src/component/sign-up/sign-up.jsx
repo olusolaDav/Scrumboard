@@ -1,5 +1,4 @@
 import "./sign-up.css";
-import { DiScrum } from "react-icons/di";
 import content from "../static/sign-up-content";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -24,6 +23,7 @@ const SignUp = () => {
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/,
         "Must contain 8 character, one Uppuercase, one lowercase, one number and one special charaacter"
       ),
+    project: yup.string().required('Please enter a project name').min(4),
     select: yup.string().required("Please select a user type").min(2)
   });
 
@@ -36,16 +36,25 @@ const SignUp = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => console.log(data);
+    
+
+  const onSubmit = (data) => {
+    localStorage.setItem(
+      data.email,
+      JSON.stringify({
+        email: data.email,
+        fullname: data.name,
+        password: data.password,
+        project: data.project,
+      })
+    );
+
+
+    console.log(JSON.parse(localStorage.getItem(data.email)));
+  }
+  
   return (
-    <div className="signupSection sign-up">
-      <div className="info">
-        <h2>Unlimited Free ChatScrum Boards</h2>
-        <DiScrum aria-hidden="true" className='icon ion-ios-ionic-outline"' />
-
-        <p>Ensures a good pace of work</p>
-      </div>
-
+   
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="signupForm"
@@ -114,7 +123,7 @@ const SignUp = () => {
           </Link>{" "}
         </p>
       </form>
-    </div>
+    
   );
 };
 
