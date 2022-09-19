@@ -1,8 +1,8 @@
 import './button.scss'
 
-const Button = ({children}) => {
+const Button = ({children, ...otherProps}) => {
     return ( 
-        <button className='btn'> {children} </button>
+        <button className='btn' {...otherProps}> {children} </button>
      );
 }
  

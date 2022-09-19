@@ -1,11 +1,12 @@
 .scrumboard{
     height: 100vh;
-     background: linear-gradient(rgba(1, 1, 10, 0.75), rgba(2, 2, 37, 0.85)), url(https://images.unsplash.com/photo-1611224885990-ab7363d1f2a9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=739&q=80);
+     background: linear-gradient(rgba(1, 1, 10, 0.75), rgba(2, 2, 37, 0.85)), url(https://images.unsplash.com/photo-1542626991-cbc4e32524cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c2NydW18ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60);
      background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     text-align: left;
     background-color: rgba(255, 255, 255, .5);
+    
 }
 
 nav {
@@ -24,6 +25,21 @@ nav {
 #info {
     padding: 20px;
     margin-left: 10px;
+    font-size: 1.4rem;
+
+    animation: scroll-right-offset  16s linear infinite;
+    animation-delay: 2s;
+    animation-fill-mode: both;
+
+}
+
+@keyframes scroll-right-offset {
+            0% {
+                transform: translateX(10%);
+            }
+            100% {
+                transform: translateX(40%);
+            }
 }
 
 @mixin box {
@@ -53,11 +69,11 @@ nav {
 
   .card {
   position: relative;
-  min-width: 320px;
+  min-width: 400px;
   height: 300px;
   box-shadow: inset 5px 5px 5px rgba(236, 159, 16, 0.2),
-    inset -5px -5px 15px rgba(173, 143, 8, 0.1),
-    5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+    inset -5px -5px 15px rgba(252, 233, 150, 0.1),
+    5px 5px 15px rgba(236, 223, 223, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   margin: 20px;
   transition: 0.5s;
@@ -83,7 +99,7 @@ nav {
   border-radius: 15px;
   display: flex;
   justify-content: center;
-  align-items: center;
+ 
   overflow: hidden;
   transition: 0.5s;
 
@@ -122,7 +138,7 @@ nav {
 
 .content {
   padding: 20px;
-  text-align: center;
+  
 
 
 h2 {
@@ -133,31 +149,23 @@ h2 {
   color: rgba(255, 255, 255, .3);
 }
 
-p {
-  font-size: 1rem;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.9);
-  z-index: 1;
-  transition: 0.5s;
-}
-
-a {
-  position: relative;
-  display: inline-block;
-  padding: 8px 20px;
-  background: black;
+.addTask {
+  display: none;
+  position: absolute;
+  left: 15px;
+  top: 50px;
+  display: block;
+  background-color: rgba(1, 1, 10, .9);
+  padding: 5px;
   border-radius: 5px;
-  text-decoration: none;
   color: white;
-  margin-top: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 20;
   transition: 0.5s;
-}
-& a:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
-  background: #fff;
-  color: #000;
-}
+  text-align:left;
+  margin-left: 0;
 
 }
 
@@ -169,9 +177,30 @@ a {
 
 }
 
-#add {
-  margin-left: 60px!important;
+
+
 }
+
+#add{
+  border: 1px solid #04C4FC;
+  background: rgba(20, 20, 20, .6);
+  font-size: 18px;
+  color: white;
+  padding: 10px 50px;
+  margin-left: 15%;
+  cursor: pointer;
+  transition: .4s;
+
+  &:hover {
+    background: rgba(20, 20, 20, .8);
+    padding: 10px 80px;
+    transform: scaleX(1)
+  }
+
+
+}
+
+
 .box-1 {
  
   background: rgb(174, 248, 248);
@@ -182,3 +211,75 @@ a {
   background: rgb(255, 239, 206);
 
 }
+
+#modal {
+  background-color: #fff;
+  position: absolute;
+  top: 75%;
+  left: 30%;
+  width: 400px;
+  height: 100px;
+  z-index: 10;
+
+  .header{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  font-size: small;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px ;
+  background: rgb(16, 17, 17);
+
+  #close{
+    font-size: 25px;
+    cursor: pointer;
+  }
+  } 
+
+  #inputField{
+    
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    border:dark solid 1px;
+    height: 30px;
+    width: 200px;
+    
+
+    &::after{
+      border:#04C4FC solid 1px;
+    }
+
+  }
+}
+
+.show {
+  display: block;
+
+  .confirm{
+    
+    background-color: #04C4FC;
+    padding: 5px;
+    color: #000;
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    cursor: pointer;
+  }
+}
+
+
+.hidden{
+  display: none;
+}
+
+.btn-hide{
+   display: none;
+}
+
+
+ 
