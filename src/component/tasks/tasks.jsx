@@ -4,7 +4,7 @@ import './tasks.scss'
 // imports related to DND
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
-export function Tasks({ dailyTask, weeklyTask }) {
+export function Tasks({ data, dailyTask, weeklyTask }) {
   const getListStyle = (isDraggingOver) => ({
     background: isDraggingOver ? "drakgray" : "transparent",
     width: "50%",
@@ -26,7 +26,6 @@ export function Tasks({ dailyTask, weeklyTask }) {
       : "rgba(255, 255, 255, .9)",
     color: isDragging ? "rgba(255, 255, 255, .9)" : "black",
     padding: isDragging ? "0%" : "2%",
-    paddingLeft: "2%",
     boxShadow: "5px 5px 15px rgba(255, 255, 255)",
     margin: "0%",
     fontSize: "17px",
@@ -66,10 +65,10 @@ export function Tasks({ dailyTask, weeklyTask }) {
               >
                 DAILY TASKS
               </h3>
-              {dailyTask.map((data, index) => (
+              {data.map((content, index) => (
                 <Draggable
-                  key={data}
-                  draggableId={`${data}${index}`}
+                  key={index}
+                  draggableId={`${content}${index}`}
                   index={index}
                 >
                   {(provided, snapshot) => (
@@ -83,7 +82,7 @@ export function Tasks({ dailyTask, weeklyTask }) {
                         provided.draggableProps.style
                       )}
                     >
-                      {data}
+                      {content}
                     </li>
                   )}
                 </Draggable>
