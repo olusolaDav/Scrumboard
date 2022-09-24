@@ -30,7 +30,7 @@ export class AddTask extends Component {
         this.setState({
             isOpen: false
         })
-        this.props.addTask(this.state)
+        this.props.addTask({content: this.state.content});
     }
 
   render() {
