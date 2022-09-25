@@ -123,15 +123,15 @@ export function Tasks({ data}) {
                 >
                   DAILY TASKS
                 </h3>
-                {dailyTask.map(({ content, id }, index) => (
+                {dailyTask.map(({ id, content }, index) => (
                   <Draggable
-                    key={index}
-                    draggableId={`${content}${id} ${index}`}
+                    key={id}
+                    draggableId={`${id} ${content}`}
                     index={index}
                   >
                     {(provided, snapshot) => (
                       <li
-                        key={`${id} ${index}`}
+                        key={`${id} ${content}`}
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
@@ -146,7 +146,7 @@ export function Tasks({ data}) {
                   </Draggable>
                 ))}
               </ul>
-              {/* {provided.placeholder} */}
+              {provided.placeholder}
             </div>
           )}
         </Droppable>
@@ -177,13 +177,13 @@ export function Tasks({ data}) {
                 </h3>
                 {weeklyTask.map(({ content, id }, index) => (
                   <Draggable
-                    key={index}
-                    draggableId={`${content}${id}${index}`}
+                    key={id}
+                    draggableId={`${id} ${content}`}
                     index={index}
                   >
                     {(provided, snapshot) => (
                       <li
-                        key={`${id} ${index}`}
+                        key={`${id} ${content}`}
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}

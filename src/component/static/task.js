@@ -1,21 +1,21 @@
 export const taskList1 = [
-  { id: 1, content: "Read bible" },
-  { id: 2, content: "Do an hour worship" },
-  { id: 3, content: "Do quiet time" },
-  { id: 4, content: "Surf the internet" },
-  { id: 5, content: "Review codes and debug" },
-  { id: 6, content: "Read a book" },
-  { id: 7, content: "Write an article" },
+  { id: 'one', content: "Read bible" },
+  { id: 'jdd', content: "Do an hour worship" },
+  { id: 'dws', content: "Do quiet time" },
+  { id: 'whe', content: "Surf the internet" },
+  { id: 'dqaw', content: "Review codes and debug" },
+  { id: 'awaer', content: "Read a book" },
+  { id: 'wqwe', content: "Write an article" },
 
 ];
 export const taskList2 = [
-  { id: 1, content: "Build chatscrum" },
-  { id: 2, content: "Build trello app" },
-  { id: 3, content: "Go shopping" },
-  { id:4, content: "Surf the internet" },
-  { id: 5, content: "Sleep all night" },
-  { id: 6, content: "Read a book" },
-  { id: 7, content: "Play call to duty" },
+  { id: 'faef', content: "Build chatscrum" },
+  { id: 'dfe', content: "Build trello app" },
+  { id: 'are', content: "Go shopping" },
+  { id:'afea', content: "Surf the internet" },
+  { id: 'afe', content: "Sleep all night" },
+  { id: 'art', content: "Read a book" },
+  { id: 'oet', content: "Play call to duty" },
 
 ];
 
