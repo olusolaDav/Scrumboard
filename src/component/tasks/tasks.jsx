@@ -42,6 +42,8 @@ export function Tasks({ daily, weekly, deleteTask}) {
     background: isDraggingOver ? "drakgray" : "transparent",
     width: "50%",
     margin: "auto",
+    overflowY: "scroll",
+    height: '25rem',
     marginTop: "4rem",
     boxShadow: `iinset 5px 5px 5px rgba(236, 159, 16, 0.2),
     inset -5px -5px 15px rgba(252, 233, 150, 0.1),
@@ -95,28 +97,49 @@ export function Tasks({ daily, weekly, deleteTask}) {
                     padding: "2%",
                     background: "#022949",
                     textAlign: "center",
+                    position: "sticky",
                   }}
                 >
-                  DAILY TASKS
+                  WEEKLY TASKS
                 </h3>
-                {dailyTask.map(({ id, content }, index) => (
-                  <Draggable key={id} draggableId={id} index={index}>
-                    {(provided, snapshot) => (
-                      <li
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={getItemStyle(
-                          snapshot.isDragging,
-                          provided.draggableProps.style
-                        )}
-                        onClick={() => deleteTask(id)}
-                      >
-                        {content}
-                      </li>
-                    )}
-                  </Draggable>
-                ))}
+                {dailyTask.map(
+                  ({ id, name, time_created, scrumgoalhistory_set }, index) => (
+                    <Draggable
+                      key={id.toString()}
+                      draggableId={`${id.toString()} ${name}`}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <li
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={getItemStyle(
+                            snapshot.isDragging,
+                            provided.draggableProps.style
+                          )}
+                          onClick={() => deleteTask(id.toString())}
+                        >
+                          <p fontSize="1rem">{name}</p>
+                          <span style={{ color: "red" }}>
+                            {time_created.slice(0, 10)} at{" "}
+                            {time_created.slice(12, 16)}
+                          </span>
+                          {scrumgoalhistory_set.map(({ id, done_by }) => {
+                            return (
+                              <div
+                                key={id.toString()}
+                                style={{ color: "blue" }}
+                              >
+                                {done_by}
+                              </div>
+                            );
+                          })}
+                        </li>
+                      )}
+                    </Draggable>
+                  )
+                )}
               </ul>
               {provided.placeholder}
             </div>
@@ -143,28 +166,49 @@ export function Tasks({ daily, weekly, deleteTask}) {
                     padding: "2%",
                     background: "#880934",
                     textAlign: "center",
+                    position: "sticky",
                   }}
                 >
-                  WEEKLY TASKS
+                  DAILY TASKS
                 </h3>
-                {weeklyTask.map(({ id, content }, index) => (
-                  <Draggable key={id} draggableId={id} index={index}>
-                    {(provided, snapshot) => (
-                      <li
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={getItemStyle(
-                          snapshot.isDragging,
-                          provided.draggableProps.style
-                        )}
-                        onClick={() => deleteTask(`${id}`)}
-                      >
-                        {content}
-                      </li>
-                    )}
-                  </Draggable>
-                ))}
+                {weeklyTask.map(
+                  ({ id, name, time_created, scrumgoalhistory_set }, index) => (
+                    <Draggable
+                      key={id.toString()}
+                      draggableId={`${id.toString()} ${name}`}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <li
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={getItemStyle(
+                            snapshot.isDragging,
+                            provided.draggableProps.style
+                          )}
+                          onClick={() => deleteTask(id.toString())}
+                        >
+                          <p fontSize="1rem">{name}</p>
+                          <span style={{ color: "red" }}>
+                            {time_created.slice(0, 10)} at{" "}
+                            {time_created.slice(12, 16)}
+                          </span>
+                          {scrumgoalhistory_set.map(({ id, done_by }) => {
+                            return (
+                              <div
+                                key={id.toString()}
+                                style={{ color: "blue" }}
+                              >
+                                {done_by}
+                              </div>
+                            );
+                          })}
+                        </li>
+                      )}
+                    </Draggable>
+                  )
+                )}
               </ul>
               {provided.placeholder}
             </div>

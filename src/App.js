@@ -4,7 +4,7 @@ import SignIn from './component/sign-in/sign-in';
 import SignUp from './component/sign-up/sign-up';
 import Home from "./component/home/home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Scrumboard from './component/scrumboard/scrumboard';
+import {Scrumboard} from './component/scrumboard/scrumboard';
 import Auth from './component/auth/auth';
 
 
