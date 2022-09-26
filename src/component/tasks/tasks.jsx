@@ -1,64 +1,40 @@
 import { useState, useEffect } from "react";
 import "./tasks.scss";
-import {taskList2} from '../static/task'
+//import {taskList2} from '../static/task'
 
 // imports related to DND
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-export function Tasks({ data}) {
+export function Tasks({ daily, weekly, deleteTask}) {
+ 
 
-  // const deleteModal = (data) => {
-  //   data.map(item => delete item.isOpen)
-  //     return data;  
-  // }
-
-  // const daily = deleteModal(data)
-
-  const [dailyTask, setDailyTask] = useState(data);
-  const [weeklyTask, setWeeklyTask] = useState(taskList2);
+  const [dailyTask, setDailyTask] = useState(daily);
+  const [weeklyTask, setWeeklyTask] = useState(weekly);
 
   useEffect(() => {
-    setDailyTask(data);
-    setWeeklyTask(taskList2);
-  }, [data]);
+    setDailyTask(daily);
+    setWeeklyTask(weekly);
+  }, [daily, weekly]);
 
   // Function for deleting items from list using index
-  const deleteItem = (list, index) => {
-    return list.splice(index, 1);
-  };
+  // const deleteItem = (list, index) => {
+  //   return list.splice(index, 1);
+  // };
 
   // Function called when Drag Ends
-  const onDragEnd = (result) => {
-    // getting the source and destination object
-    const { source, destination } = result;
-    if (!destination) return;
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) return;
 
-    if (source.droppableId === destination.droppableId) {
-      if (source.droppableId === "daily") {
-        let tempdailyTask = Array.from(dailyTask);
-        const removed = deleteItem(tempdailyTask, source.index);
-        tempdailyTask.splice(destination.index, 0, removed);
-        setDailyTask(tempdailyTask);
-      } else {
-        let tempweeklyTask = weeklyTask;
-        const removed = deleteItem(tempweeklyTask, source.index);
-        tempweeklyTask.splice(destination.index, 0, removed);
-        setWeeklyTask(tempweeklyTask);
-      }
-    } else {
-      let tempdailyTask = Array.from(dailyTask);
-      let tempweeklyTask = weeklyTask;
-      if (source.droppableId === "daily") {
-        const removed = deleteItem(tempdailyTask, source.index);
-        tempweeklyTask.splice(destination.index, 0, removed);
-        setDailyTask(tempdailyTask);
-        setWeeklyTask(tempweeklyTask);
-      } else {
-        const removed = deleteItem(tempweeklyTask, source.index);
-        tempdailyTask.splice(destination.index, 0, removed);
-        setDailyTask(tempdailyTask);
-        setWeeklyTask(tempweeklyTask);
-      }
+    if (result.source?.droppableId === "daily") {
+      const items = Array.from(dailyTask);
+      const [reorderedItems] = items.splice(result.source.index, 1);
+      setDailyTask(items);
+      setWeeklyTask([...weeklyTask, reorderedItems]);
+    } else if (result.source?.droppableId === "weekly") {
+      const items = Array.from(weeklyTask);
+      const [reorderedItems] = items.splice(result.source.index, 1);
+      setWeeklyTask(items);
+      setDailyTask([...dailyTask, reorderedItems]);
     }
   };
 
@@ -93,7 +69,7 @@ export function Tasks({ data}) {
   });
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={handleOnDragEnd}>
       <div style={{ width: "100%", display: "flex" }}>
         <Droppable droppableId="daily">
           {(provided, snapshot) => (
@@ -124,14 +100,9 @@ export function Tasks({ data}) {
                   DAILY TASKS
                 </h3>
                 {dailyTask.map(({ id, content }, index) => (
-                  <Draggable
-                    key={id}
-                    draggableId={`${id} ${content}`}
-                    index={index}
-                  >
+                  <Draggable key={id} draggableId={id} index={index}>
                     {(provided, snapshot) => (
                       <li
-                        key={`${id} ${content}`}
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
@@ -139,6 +110,7 @@ export function Tasks({ data}) {
                           snapshot.isDragging,
                           provided.draggableProps.style
                         )}
+                        onClick={() => deleteTask(id)}
                       >
                         {content}
                       </li>
@@ -175,15 +147,10 @@ export function Tasks({ data}) {
                 >
                   WEEKLY TASKS
                 </h3>
-                {weeklyTask.map(({ content, id }, index) => (
-                  <Draggable
-                    key={id}
-                    draggableId={`${id} ${content}`}
-                    index={index}
-                  >
+                {weeklyTask.map(({ id, content }, index) => (
+                  <Draggable key={id} draggableId={id} index={index}>
                     {(provided, snapshot) => (
                       <li
-                        key={`${id} ${content}`}
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
@@ -191,6 +158,7 @@ export function Tasks({ data}) {
                           snapshot.isDragging,
                           provided.draggableProps.style
                         )}
+                        onClick={() => deleteTask(`${id}`)}
                       >
                         {content}
                       </li>

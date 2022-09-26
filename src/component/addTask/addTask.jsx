@@ -31,6 +31,10 @@ export class AddTask extends Component {
             isOpen: false
         })
         this.props.addTask({content: this.state.content});
+
+          this.setState({
+            content: ""
+          });  
     }
 
   render() {
