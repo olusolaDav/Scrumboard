@@ -1,18 +1,22 @@
 export const taskList1 = [
-  "Read bible",
-  "Do an hour worship",
-  "Do quiet time",
-  "Surf the internet",
-  "Review codes and debug",
-  "Read a book",
-  "Write an article",
+  { id: 'one', content: "Read bible" },
+  { id: 'jdd', content: "Do an hour worship" },
+  { id: 'dws', content: "Do quiet time" },
+  { id: 'whe', content: "Surf the internet" },
+  { id: 'dqaw', content: "Review codes and debug" },
+  { id: 'awaer', content: "Read a book" },
+  { id: 'wqwe', content: "Write an article" },
+
 ];
 export const taskList2 = [
-  "Build chatscrum",
-  "Build trello app",
-  "Go shopping",
-  "Sleep all night",
-  "Play call to duty",
+  { id: 'faef', content: "Build chatscrum" },
+  { id: 'dfe', content: "Build trello app" },
+  { id: 'are', content: "Go shopping" },
+  { id:'afea', content: "Surf the internet" },
+  { id: 'afe', content: "Sleep all night" },
+  { id: 'art', content: "Read a book" },
+  { id: 'oet', content: "Play call to duty" },
+
 ];
 
 

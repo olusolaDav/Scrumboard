@@ -1,90 +1,49 @@
-import { useState, useEffect } from "react";
+import React, { Component } from "react";
 import Data from "../static/data";
-import { IoClose } from "react-icons/io5";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 import "./scrumbaord.scss";
-import {Tasks} from "../tasks/tasks";
-import { taskList1, taskList2 } from "../static/task";
+import { Tasks } from "../tasks/tasks";
+//import { taskList1} from "../static/task";
 
-import { DragDropContext } from "react-beautiful-dnd";
+import { AddTask } from "../addTask/addTask";
+import Users from "../users/users";
+import axios from "axios";
 
-function Scrumboard() {
-  const [data] = useState(Data);
-  const [isOpen, setIsOpen] = useState(false);
-  const [setTask] = useState(null);
+export class Scrumboard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      data: Data,
+      weekly: [],
+      tasks: [],
+    };
+  }
 
-  const [dailyTask, setDailyTask] = useState(taskList1);
-  const [weeklyTask, setWeeklyTask] = useState(taskList2);
-
-  useEffect(() => {
-    setDailyTask(taskList1);
-    setWeeklyTask(taskList2);
-  }, []);
-
-  // Function for deleting items from list using index
-  const deleteItem = (list, index) => {
-    return list.splice(index, 1);
+  addTask = (task) => {
+    task.id = Math.random().toString(36).slice(2, 9);
+    let tasks = [...this.state.tasks, task];
+    this.setState({tasks});
   };
 
-  // Function called when Drag Ends
-  const onDragEnd = (result) => {
-    // getting the source and destination object
-    const { source, destination } = result;
-    if (!destination) return;
+  deleteTask = (id) => {
+    const tasks = this.state.tasks.filter((item) => item.id !== id);
 
-    if (source.droppableId === destination.droppableId) {
-      if (source.droppableId === "daily") {
-        let tempdailyTask = dailyTask;
-        const removed = deleteItem(tempdailyTask, source.index);
-        tempdailyTask.splice(destination.index, 0, removed);
-        setDailyTask(tempdailyTask);
-      } else {
-        let tempweeklyTask = weeklyTask;
-        const removed = deleteItem(tempweeklyTask, source.index);
-        tempweeklyTask.splice(destination.index, 0, removed);
-        setWeeklyTask(tempweeklyTask);
-      }
-    } else {
-      let tempdailyTask = dailyTask;
-      let tempweeklyTask = weeklyTask;
-      if (source.droppableId === "daily") {
-        const removed = deleteItem(tempdailyTask, source.index);
-        tempweeklyTask.splice(destination.index, 0, removed);
-        setDailyTask(tempdailyTask);
-        setWeeklyTask(tempweeklyTask);
-      } else {
-        const removed = deleteItem(tempweeklyTask, source.index);
-        tempdailyTask.splice(destination.index, 0, removed);
-        setDailyTask(tempdailyTask);
-        setWeeklyTask(tempweeklyTask);
-      }
-    }
+    this.setState({tasks});
   };
 
-  const openModal = () => {
-    setIsOpen(true);
-    console.log("modal open");
-  };
+  componentDidMount() {
+    axios
+      .get("http://liveapi.chatscrum.com/scrum/api/scrumgoals/")
+      .then((res) => this.setState({ tasks: res.data }));
+  }
 
-  const closeModal = () => {
-    setIsOpen(false);
-  };
 
-  const onChange = (e) => {
-    setTask(e.target.value);
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsOpen(false);
-    setTask("");
-  };
-
-  console.log(data);
-
-  return (
-    <DragDropContext onDragEnd={onDragEnd}>
+  render() {
+    const { tasks, data, weekly } = this.state;
+    const { addTask, deleteTask } = this;
+    return (
       <div className="scrumboard">
         <nav>
           <Link style={{ textDecoration: "none" }} to="/">
@@ -120,36 +79,14 @@ function Scrumboard() {
 
         <div style={{ display: "flex" }}>
           <div style={{ width: "60%", margin: "auto" }}>
-            <Tasks dailyTask={dailyTask} weeklyTask={weeklyTask} />
+            <Tasks daily={tasks} weekly={weekly} deleteTask={deleteTask} />
           </div>
         </div>
-        <div id="modal" className={isOpen ? "show" : "hidden"}>
-          <div className="header">
-            <h3>Add new task</h3>
-            <h3 id="close" onClick={() => closeModal()}>
-              {" "}
-              <IoClose />{" "}
-            </h3>
-          </div>
 
-          <form onSubmit={handleSubmit}>
-            <input type="text" name="" id="inputField" onChange={onChange} />
-            <button className="confirm">CONFIRM</button>
-          </form>
-        </div>
+        <AddTask addTask={addTask} />
 
-        <button
-          style={{ marginTop: "1.5rem" }}
-          id="add"
-          className={isOpen ? "btn-hide" : null}
-          onClick={() => openModal()}
-        >
-          {" "}
-          ADD TASK
-        </button>
+        <Users />
       </div>
-    </DragDropContext>
-  );
+    );
+  }
 }
-
-export default Scrumboard;
