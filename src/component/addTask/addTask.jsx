@@ -52,7 +52,7 @@ export class AddTask extends Component {
           </div>
 
           <form onSubmit={handleSubmit}>
-            <input type="text" name="" id="inputField" onChange={onChange} />
+            <input type="text" name="" id="inputField" onChange={onChange} value={this.state.content} />
             <button className="confirm">CONFIRM</button>
           </form>
         </div>

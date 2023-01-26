@@ -1,0 +1,54 @@
+
+
+.main {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 18rem;
+    
+}
+
+h4 {
+    font-weight:800;
+    text-align: center;
+    background-color: #04C4FC;
+    color: black;
+    padding: .3rem;
+    margin: 0;
+    cursor: pointer;
+    
+    
+}
+
+#user-list{
+    background-color: rgba($color: #04C4FC, $alpha: .3);
+    z-index: 10;
+     
+   transform: translateY(40rem);
+   animation: slideUp .2s linear .5s forwards;
+
+    .user{
+         font-size: 1.1rem;
+         display: flex;
+         justify-content:flex-start;
+         color: whitesmoke;
+         padding: .2rem;
+         border-bottom: white solid 1px;
+
+       
+    }
+    
+      span{
+            padding-right: 5rem;
+         }
+
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(40rem);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
