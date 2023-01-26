@@ -64,9 +64,10 @@ function Scrumboard() {
           </p>
         </div>
       </nav>
-      <div id="info-container">
-        <p id="info">Hello, {data.fullname} welcome to your scrumboard</p>
-      </div>
+      <div>
+         <div id="info-container">
+            <p id="info">Hello, {data.fullname} welcome to your scrumboard</p>
+        </div>
 
       <div style={{ display: "flex" }}>
         <div style={{ width: "60%", margin: "auto" }}>
@@ -75,6 +76,8 @@ function Scrumboard() {
       </div>
 
       <AddTask addTask={addTask} />
+      </div>
+     
     </div>
   );
 }

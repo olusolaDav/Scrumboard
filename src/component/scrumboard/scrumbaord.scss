@@ -1,4 +1,5 @@
 .scrumboard{
+    width: 100vw;
     height: 100vh;
      background: linear-gradient(rgba(1, 1, 10, 0.75), rgba(2, 2, 37, 0.85)), url(https://images.unsplash.com/photo-1542626991-cbc4e32524cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c2NydW18ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60);
      background-repeat: no-repeat;
@@ -6,9 +7,36 @@
     background-size: cover;
     text-align: left;
     background-color: rgba(255, 255, 255, .5);
+
+    display: grid;
+    grid-template-rows:  minmax(20vh, min-content)  minmax(80vh, min-content) ;
+   
+  
+
+    @media only screen and (max-width: 76rem) {
+        grid-template-rows: 6rem calc(100vh - 6rem);
+    }
     
     
 }
+
+
+
+// .container-home {
+//     display: grid;
+//     grid-template-rows:  minmax(90vh, min-content)  24vh minmax(80vh, min-content) repeat(2, minmax(90vh, min-content)) minmax(40vh, min-content) minmax(80vh, min-content) minmax(20vh, min-content);
+//     grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 18rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+
+//     // @media only screen and (max-width: $bp-large) {
+//     //     grid-template-rows: 6rem 80vh min-content 40vw repeat(3, min-content);
+//     //     grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+//     // }
+
+//     // @media only screen and (max-width: $bp-medium) {
+//     //     grid-template-rows: 6rem calc(100vh - 6rem);
+//     // }
+// }
+
 
 nav {
     position: fixed;
@@ -198,6 +226,9 @@ nav {
 .btn-hide{
    display: none;
 }
+
+
+
 
 
 
