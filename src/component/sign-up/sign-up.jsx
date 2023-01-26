@@ -54,50 +54,48 @@ const SignUp = () => {
   }
   
   return (
-   
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="signupForm"
-        name="signupform"
-      >
-        <h1>Don't Have an account?</h1>
-        <h3>sign up here!</h3>
-        <ul>
-          {content.inputs.map((input, key) => {
-            return (
-              <li key={key}>
-                <input
-                  className={`inputFields ${
-                    errors[input.name] ? `errorInput` : null
-                  }`}
-                  type={input.type}
-                  placeholder={input.placeholder}
-                  name={input.name}
-                  {...register(input.name)}
-                />
-                <p className="message">{errors[input.name]?.message}</p>
-              </li>
-            );
-          })}
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="signupForm"
+      name="signupform"
+    >
+      <h1>Don't Have an account?</h1>
+      <h3>sign up here!</h3>
+      <ul>
+        {content.inputs.map((input, key) => {
+          return (
+            <li key={key}>
+              <input
+                className={`inputFields ${
+                  errors[input.name] ? `errorInput` : null
+                }`}
+                type={input.type}
+                placeholder={input.placeholder}
+                name={input.name}
+                {...register(input.name)}
+              />
+              <p className="message">{errors[input.name]?.message}</p>
+            </li>
+          );
+        })}
 
-          <li>
-            <label className="options" htmlFor="options">
-              User type
-            </label>
-            <select
-              disabled={false}
-              className={`inputFields ${errors.select ? `errorInput` : null}`}
-              {...register("select")}
-            >
-              <option value="">Select User type</option>
-              <option value="Developer">Developer</option>
-              <option value="Owner">Owner</option>
-            </select>
-            {errors.select && (
-              <p className="message">{errors.select.message}</p>
-            )}
-          </li>
-          <li>
+        <li>
+          <label className="options" htmlFor="options">
+            User type
+          </label>
+          <select
+            disabled={false}
+            className={`inputFields ${errors.select ? `errorInput` : null}`}
+            {...register("select")}
+          >
+            <option value="">Select User type</option>
+            <option value="Developer">Developer</option>
+            <option value="Owner">Owner</option>
+          </select>
+          {errors.select && <p className="message">{errors.select.message}</p>}
+        </li>
+        <li>
+         
             <button
               className=""
               type="submit"
@@ -107,23 +105,23 @@ const SignUp = () => {
             >
               SIGN UP
             </button>
-          </li>
-        </ul>
+         
+        </li>
+      </ul>
 
-        <p>
-          {" "}
-          Do you have an account?{" "}
-          <Link to="/sign-in" className="links">
-            Sign In
-          </Link>
-        </p>
-        <p>
-          <Link to="/" className="links">
-            Back to homepage
-          </Link>{" "}
-        </p>
-      </form>
-    
+      <p>
+        {" "}
+        Do you have an account?{" "}
+        <Link to="/sign-in" className="links">
+          Sign In
+        </Link>
+      </p>
+      <p>
+        <Link to="/" className="links">
+          Back to homepage
+        </Link>{" "}
+      </p>
+    </form>
   );
 };
 
